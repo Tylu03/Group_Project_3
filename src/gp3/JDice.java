@@ -1,8 +1,11 @@
+package gp3;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
+
 /*
 JDice: Java Dice Rolling Program
 Copyright (C) 2006 Andrew D. Hilton  (adhilton@cis.upenn.edu)
@@ -34,22 +37,26 @@ public class JDice {
 	JComboBox inputBox;
 	long lastEvent; /* hack to prevent double events with text
 			   entry */
-	public JDice_Listener(JList resultList,
-			     JComboBox inputBox){
+//	public JDice_Listener(JList resultList,
+//			     JComboBox inputBox){
+	public JDiceListener(JList resultList,
+            JComboBox inputBox) {
 
 	    this.listItems=new Vector<String>();
 	    this.resultList=resultList;
-	    thisinputBox=inputBox;
+//	    thisinputBox=inputBox;
+	    this.inputBox=inputBox;
 	    lastEvent=0;
 	}
 	public void actionPerformed(ActionEvent e) {
 
-	    if(e.getWhen()=lastEvent)
-		return;
+//	    if(e.getWhen()=lastEvent)
+//		return;
+		if (e.getWhen() == lastEvent) return;
 	    lastEvent=e.getWhen();
 	    if(e.getSource() instanceof JComboBox ||
 	       e.getActionCommand().equals(ROLL)) {
-		String s=inputBox.getSelectedItem().toString();
+		String s = inputBox.getSelectedItem().toString();
 		String[] arr=s.split("=");
 		String name="";
 		for(int i=0;i<arr.length-2;i++) {
@@ -97,14 +104,16 @@ public class JDice {
 		selectionIndices[i]=i;
 	    }
 	    resultList.setListData(listItems);
-	    resultList.	setSelectedIndices(selectionIndices);
+//	    resultList.	setSelectedIndices(selectionIndices);
+	    resultList.setSelectedIndices(selectionIndices);
 	
 
 
     }
     public static void main(String[] args) {
 	Vector<String> v=new Vector<String>();
-//	if(args.length>=1) {
+
+	if(args.length>=1) {//xoa comment
 	    try {
 		BufferedReader br=new BufferedReader(new FileReader(args[0]));
 		String s;
@@ -153,5 +162,6 @@ public class JDice {
 	jf.setVisible(true);
 			  
     }
-
+    
+  }//thêm ngoặc
 }
